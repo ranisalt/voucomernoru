@@ -21,7 +21,7 @@ const port = do {
   const port = parseInt(process.env.PORT || 3000, 10)
 
   if (isNaN(port)) {
-      // named pipe
+    // named pipe
     process.env.PORT
   } else if (port >= 0) {
     // port number
@@ -37,26 +37,26 @@ const port = do {
 
 const server = http.createServer(app.callback())
 
-  /**
-   * Event listener for HTTP server "error" event.
-   */
+/**
+ * Event listener for HTTP server "error" event.
+ */
 
 const onError = error => {
   if (error.syscall !== 'listen') {
     throw error
   }
 
-  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`
 
-      // handle specific listen errors with friendly messages
+  // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES': {
-      console.error(bind + ' requires elevated privileges')
+      console.error(`${bind} requires elevated privileges`)
       process.exit(1)
       break
     }
     case 'EADDRINUSE': {
-      console.error(bind + ' is already in use')
+      console.error(`${bind} is already in use`)
       process.exit(1)
       break
     }
@@ -72,8 +72,8 @@ const onError = error => {
 
 const onListening = () => {
   const addr = server.address()
-  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port
-  debug('tickt:server')('Listening on ' + bind)
+  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`
+  debug('tickt:server')(`Listening on ${bind}`)
 }
 
 /**

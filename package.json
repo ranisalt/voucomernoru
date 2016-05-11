@@ -21,9 +21,10 @@
   "dependencies": {
     "babel-runtime": "^6.6.1",
     "debug": "^2.2.0",
-    "koa": "^1.2.0",
+    "koa": "^2.0.0",
     "koa-bodyparser": "^2.1.0",
-    "koa-logger": "^1.3.0"
+    "koa-logger": "^2.0.0",
+    "koa-router": "^7.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.8.0",
@@ -34,6 +35,10 @@
     "xo": "^0.15.0"
   },
   "xo": {
+    "esnext": true,
+    "rules": {
+      "no-unused-expressions": 1
+    },
     "semicolon": false,
     "space": true
   }
