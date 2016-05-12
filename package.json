@@ -4,11 +4,11 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "build": "babel {i,r,s}*.js -d dist && cp -r views dist",
+    "build": "babel *.js -d dist && cp -r views dist",
     "heroku-postinstall": "npm run update",
     "start": "npm run build && node dist/server.js",
     "test": "xo && babel-tap *.spec.js",
-    "update": "babel update.js -d dist && node dist/update.js"
+    "update": "npm run build && node dist/update.js"
   },
   "repository": {
     "type": "git",
