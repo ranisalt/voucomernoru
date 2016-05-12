@@ -6,7 +6,8 @@
   "scripts": {
     "build": "babel *.js -d dist && cp -r views dist",
     "start": "npm run build && node dist/server.js",
-    "test": "xo && babel-tap *.spec.js"
+    "test": "xo && babel-tap *.spec.js",
+    "update": "npm run build && node dist/update.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "dependencies": {
     "babel-runtime": "^6.6.1",
     "bluebird": "^3.3.5",
+    "cheerio": "^0.20.0",
     "debug": "^2.2.0",
     "koa": "^2.0.0",
     "koa-bodyparser": "^2.1.0",
@@ -28,7 +30,8 @@
     "koa-router": "^7.0.1",
     "koa-views": "^5.0.1",
     "mustache": "^2.2.1",
-    "redis": "^2.6.0-2"
+    "redis": "^2.6.0-2",
+    "request": "^2.72.0"
   },
   "devDependencies": {
     "babel-cli": "^6.8.0",
