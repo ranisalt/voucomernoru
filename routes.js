@@ -5,15 +5,21 @@ import client from './storage'
 
 const router = new Router()
 
-router.get('/', async (ctx, /*next*/) => {
-  const menu = {
+const menu = async () => {
+  return {
     main: await client.getAsync('lunch:main'),
     complement: await client.getAsync('lunch:complement'),
     salad: await client.getAsync('lunch:salad'),
     dessert: await client.getAsync('lunch:dessert')
   }
+}
 
-  await ctx.render('index', menu)
+router.get('/', async ctx => {
+  await ctx.render('index', await menu())
+})
+
+router.get('/menu.json', async ctx => {
+  ctx.body = await menu()
 })
 
 export default router
