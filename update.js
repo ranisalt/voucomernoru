@@ -12,22 +12,18 @@ request.get('http://ru.ufsc.br/ru/', (err, res, html) => {
     throw err
   }
 
-  console.log('Parsing HTML')
   const $ = cheerio.load(html)
-  console.log('HTML parsed')
 
   // adjust date to UTC-3, make sunday wrap around and offset header
   const weekday = (new Date().getDay() - 1) % 7 + 1
 
-  console.log('Filtering elements')
   const cells = $(`.entry > table:first-of-type tr:nth-child(${weekday}) td:nth-child(n+4)`)
-  console.log('Elements filtered')
 
   if (cells.length !== 4) {
+    console.log(html)
     throw new Error('Failure to parse HTML')
   }
 
-  console.log('Updating database')
   client.multi()
     .set('lunch:main', sanitize(cells.eq(0).text()))
     .set('lunch:complement', sanitize(cells.eq(1).text()))
@@ -40,5 +36,4 @@ request.get('http://ru.ufsc.br/ru/', (err, res, html) => {
 
       client.quit()
     })
-  console.log('Finished scraping')
 })
