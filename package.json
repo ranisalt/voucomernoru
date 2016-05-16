@@ -6,9 +6,9 @@
   "scripts": {
     "build": "babel *.js -d dist && cp -r views dist",
     "heroku-postinstall": "npm run update",
-    "start": "npm run build && node dist/server.js",
+    "start": "[ 'server.js' -ot 'dist/server.js' ] || npm run build && node dist/server.js",
     "test": "xo && babel-tap *.spec.js",
-    "update": "npm run build && node dist/update.js"
+    "update": "[ 'update.js' -ot 'dist/server.js' ] || npm run build && node dist/update.js"
   },
   "repository": {
     "type": "git",
