@@ -5,6 +5,12 @@ import cheerio from 'cheerio'
 import request from 'request'
 import client from './storage'
 
+const replMap = {
+  'bife': 'chinelo',
+  'sobrecoxa': 'morcego',
+}
+
+const ruify = words => words.replace(/\w+/, match => replMap[match])
 const sanitize = words => words.toLowerCase().replace('/', ' e ').trim()
 
 request.get('http://ru.ufsc.br/ru/', (err, res, html) => {
