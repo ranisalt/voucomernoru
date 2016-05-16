@@ -13,7 +13,10 @@ const replMap = {
 const ruify = words => words.replace(/\w+/, match => replMap[match])
 const sanitize = words => words.toLowerCase().replace('/', ' e ').trim()
 
-request.get('http://ru.ufsc.br/ru/', (err, res, html) => {
+request({
+  gzip: true,
+  uri: 'http://ru.ufsc.br/ru/',
+}, (err, res, html) => {
   if (err) {
     throw err
   }
@@ -21,12 +24,10 @@ request.get('http://ru.ufsc.br/ru/', (err, res, html) => {
   const $ = cheerio.load(html)
 
   // adjust date to UTC-3, make sunday wrap around and offset header
-  const weekday = (new Date().getDay() - 1) % 7 + 1
-
+  const weekday = (new Date().getDay() - 1) % 7 + 2
   const cells = $(`.entry > table:first-of-type tr:nth-child(${weekday}) td:nth-child(n+4)`)
 
   if (cells.length !== 4) {
-    console.log(html)
     throw new Error('Failure to parse HTML')
   }
 
