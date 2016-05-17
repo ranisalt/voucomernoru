@@ -1,12 +1,14 @@
 'use strict'
 
 import Koa from 'koa'
+import favicon from 'koa-favicon'
 import logger from 'koa-logger'
 import views from 'koa-views'
 import router from './routes'
 
 const app = new Koa()
 
+app.use(favicon(`${__dirname}/favicon.ico`))
 app.use(views(`${__dirname}`, {
   map: {
     html: 'mustache'
