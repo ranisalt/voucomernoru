@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "build": "babel *.js -d dist && cp -r views dist",
+    "build": "mkdir -p dist && babel *.js -d dist && cp index.html dist",
     "heroku-postinstall": "npm run update",
     "start": "[ 'server.js' -ot 'dist/server.js' ] || npm run build && node dist/server.js",
     "test": "xo && babel-tap *.spec.js",

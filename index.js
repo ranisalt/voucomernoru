@@ -7,7 +7,7 @@ import router from './routes'
 
 const app = new Koa()
 
-app.use(views(`${__dirname}/views`, {
+app.use(views(`${__dirname}`, {
   map: {
     html: 'mustache'
   }
