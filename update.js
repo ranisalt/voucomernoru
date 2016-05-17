@@ -7,10 +7,11 @@ import client from './storage'
 
 const replMap = {
   'bife': 'chinelo',
-  'sobrecoxa': 'morcego',
+  'quibe': 'quibe :(',
 }
 
-const ruify = words => words.replace(/\w+/, match => replMap[match])
+const regex = new RegExp(Object.keys(replMap).join('|'))
+const ruify = words => words.replace(regex, match => replMap[match])
 const sanitize = words => words.toLowerCase().replace('/', ' e ').trim()
 
 request({
