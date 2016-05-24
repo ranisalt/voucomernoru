@@ -33,7 +33,7 @@ request({
   }
 
   client.multi()
-    .set('lunch:main', sanitize(cells.eq(0).text()))
+    .set('lunch:main', ruify(sanitize(cells.eq(0).text())))
     .set('lunch:complement', sanitize(cells.eq(1).text()))
     .set('lunch:salad', sanitize(cells.eq(2).text()))
     .set('lunch:dessert', sanitize(cells.eq(3).text()))
