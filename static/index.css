@@ -1,0 +1,45 @@
+@import "normalize.css"; /* == @import "./node_modules/normalize.css/normalize.css"; */
+
+html {
+  font-family: sans-serif;
+  font-size: 3vmin;
+  padding: 1vmin;
+  text-align: center;
+}
+
+.grid {
+  column-count: 3;
+  column-gap: 1em;
+  line-height: 0;
+  padding: 1em;
+}
+
+.grid img {
+  height: auto;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+  html {
+    font-size: 4vmin;
+  }
+
+  .grid {
+    column-count: 2;
+  }
+
+  a {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  html {
+    font-size: 5vmin;
+  }
+
+  .grid {
+    column-count: 1;
+  }
+}
