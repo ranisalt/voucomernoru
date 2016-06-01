@@ -19,7 +19,11 @@ const menu = async () => {
 }
 
 router.get('/', async ctx => {
-  await ctx.render('index', await menu())
+  const hour = new Date().getHours()
+  await ctx.render('images', Object.assign(await menu(), {
+    images: (await client.lrangeAsync('images', 0, 10)).map(JSON.parse),
+    showUpload: (hour >= 11 && hour < 14) || (hour >= 17 && hour < 19)
+  }))
 })
 
 router.post('/upload', upload.single('image'), async ctx => {
@@ -29,9 +33,18 @@ router.post('/upload', upload.single('image'), async ctx => {
     stream.end(ctx.req.file.buffer)
     stream.pipe(upload)
   })
+
+  if (payload.error) {
+    throw new Error('Not found')
+  }
+
   ctx.body = {
     url: payload.secure_url
   }
+  await client.lpushAsync('images', JSON.stringify({
+    id: payload.public_id,
+    url: payload.secure_url
+  }))
 })
 
 router.get('/menu.json', async ctx => {
