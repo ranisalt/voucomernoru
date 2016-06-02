@@ -49,6 +49,7 @@
     "bower": "^1.7.9",
     "postcss-cli": "^2.5.2",
     "postcss-import": "^8.1.2",
+    "request-promise": "^3.0.0",
     "rollup": "^0.26.3",
     "rollup-plugin-node-resolve": "^1.5.0",
     "xo": "^0.15.0"
