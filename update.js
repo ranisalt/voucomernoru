@@ -36,5 +36,10 @@ import client from './storage'
     .set('lunch:dessert', sanitize(cells.eq(3).text()))
     .execAsync()
 
+  const images = await client.lrangeAsync('images', 0, -1).map(JSON.parse)
+  images.forEach(image => {
+    cloudinary.uploader.destroy(image.id)
+  })
+
   await client.quitAsync()
 })()
