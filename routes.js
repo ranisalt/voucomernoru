@@ -28,7 +28,12 @@ router.get('/', async ctx => {
 
 router.post('/upload', upload.single('image'), async ctx => {
   const payload = await new Promise(resolve => {
-    const upload = cloudinary.uploader.upload_stream(resolve)
+    const upload = cloudinary.uploader.upload_stream(resolve, {
+      crop: 'limit',
+      format: 'jpg',
+      height: 1000,
+      width: 1000
+    })
     const stream = new PassThrough()
     stream.end(ctx.req.file.buffer)
     stream.pipe(upload)
