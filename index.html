@@ -19,8 +19,14 @@
     <section class="gallery">
       <div class="upload">
         <form name="upload" action="/upload" method="post">
-          <input type="file" accept="image/*" capture required />
-          <input type="submit" />
+          <div class="pure-button pure-button-secondary">
+            <span>envie uma foto</span>
+            <input type="file" accept="image/*" capture required />
+          </div>
+          <div class="pure-button pure-button-primary pure-button-disabled">
+            <span>dale!</span>
+            <input type="submit" disabled />
+          </div>
         </form>
       </div>
       <div class="grid">

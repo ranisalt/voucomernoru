@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run build:css && npm run build:js && cp favicon.ico index.html dist",
-    "build:css": "mkdir -p dist/static && postcss -u autoprefixer -u postcss-import static/index.css -o dist/static/voucomernoru.css",
+    "build:css": "mkdir -p dist/static && postcss -u autoprefixer -u postcss-import -c postcss.config.json static/index.css -o dist/static/voucomernoru.css",
     "build:js": "mkdir -p dist/static && rollup -c | babel -s inline -o dist/static/voucomernoru.js",
     "heroku-postinstall": "npm run update",
     "start": "[ 'server.js' -ot 'dist/server.js' ] || npm run build && node dist/server.js",
@@ -46,12 +46,10 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-tap": "^5.0.0",
-    "masonry-layout": "^4.1.0",
-    "normalize.css": "^4.1.1",
+    "bower": "^1.7.9",
     "postcss-cli": "^2.5.2",
     "postcss-import": "^8.1.2",
     "rollup": "^0.26.3",
-    "rollup-plugin-babel": "^2.4.0",
     "rollup-plugin-node-resolve": "^1.5.0",
     "xo": "^0.15.0"
   },

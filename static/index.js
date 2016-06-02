@@ -1,9 +1,17 @@
-import * as Masonry from 'masonry-layout'
-
 document.addEventListener('DOMContentLoaded', () => {
+  const fileInput = upload.querySelector('input[type="file"]')
+
+  fileInput.addEventListener('change', event => {
+    if (event.target.files.length > 0) {
+      const fileSubmit = upload.querySelector('input[type="submit"]')
+      fileSubmit.disabled = false
+      fileSubmit.parentNode.classList.remove('pure-button-disabled')
+    }
+  })
+
   upload.addEventListener('submit', event => {
     const data = new FormData()
-    data.append('image', upload[0].files[0])
+    data.append('image', fileInput.files[0])
 
     fetch(upload.action, {
       method: upload.method,
@@ -11,8 +19,5 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     return event.preventDefault()
-  })
-
-  const grid = new Masonry('.grid', {
   })
 })
