@@ -17,6 +17,7 @@
       <p>{{dessert}}</p>
     </main>
     <section class="gallery">
+      {{#showUpload}}
       <div class="upload">
         <form name="upload" action="/upload" method="post">
           <div class="pure-button pure-button-secondary">
@@ -29,6 +30,7 @@
           </div>
         </form>
       </div>
+      {{/showUpload}}
       <div class="grid">
         {{#images}}
           <img src="{{{url}}}" data-id="{{id}}" />
