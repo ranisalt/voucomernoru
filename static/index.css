@@ -38,7 +38,7 @@ html {
   width: 100%;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 80em) {
   html {
     font-size: 4vmin;
   }
@@ -52,7 +52,7 @@ html {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 64em) {
   html {
     font-size: 5vmin;
   }
