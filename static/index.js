@@ -17,6 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
       method: upload.method,
       body: data
     })
+    .then(response => response.json())
+    .then(data => {
+      const gallery = document.querySelector('.grid')
+      const newImage = document.createElement('img')
+      newImage.src = data.url
+      newImage.setAttribute('data-id', data.id)
+      gallery.insertBefore(newImage, gallery.firstChild)
+    })
 
     return event.preventDefault()
   })
