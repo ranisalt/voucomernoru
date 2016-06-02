@@ -4,7 +4,9 @@
 html {
   box-sizing: border-box;
   font-family: sans-serif;
+  font-size: 3vm; /* IE */
   font-size: 3vmin;
+  padding: 1vm; /* IE */
   padding: 1vmin;
   text-align: center;
 }
@@ -40,6 +42,7 @@ html {
 
 @media (max-width: 80em) {
   html {
+    font-size: 4vm; /* IE */
     font-size: 4vmin;
   }
 
@@ -54,6 +57,7 @@ html {
 
 @media (max-width: 64em) {
   html {
+    font-size: 5vm; /* IE */
     font-size: 5vmin;
   }
 

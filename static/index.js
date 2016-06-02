@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+  /* guess who doesn't support fetch yet...
+   * fuck you if you use IE/Safari, I won't write fallbacks */
+  if (!window.fetch) {
+    upload.parentNode.removeChild(upload)
+    return
+  }
+
   const fileInput = upload.querySelector('input[type="file"]')
 
   fileInput.addEventListener('change', event => {
