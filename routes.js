@@ -20,7 +20,7 @@ const menu = async () => {
 
 router.get('/', async ctx => {
   const hour = new Date().getHours()
-  await ctx.render('images', Object.assign(await menu(), {
+  await ctx.render('index', Object.assign(await menu(), {
     images: (await client.lrangeAsync('images', 0, 10)).map(JSON.parse),
     showUpload: (hour >= 11 && hour < 14) || (hour >= 17 && hour < 19)
   }))
