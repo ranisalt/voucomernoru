@@ -10,7 +10,7 @@
     "build:js": "mkdir -p dist/static && rollup -c | babel -s inline -o dist/static/voucomernoru.js",
     "clean": "rm -r dist",
     "heroku-postbuild": "npm run update",
-    "postinstall": "bower install",
+    "postinstall": "bower install && npm run build",
     "start": "[ -f 'dist/server.js' ] || npm run build && node dist/server.js",
     "test": "xo && babel-tap *.spec.js",
     "update": "npm run build:app && node dist/update.js"
