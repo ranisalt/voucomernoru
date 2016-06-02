@@ -8,6 +8,7 @@
     "build:app": "mkdir -p dist && babel *.js -d dist && cp favicon.ico index.html dist",
     "build:css": "mkdir -p dist/static && postcss -u autoprefixer -u postcss-import -c postcss.config.json static/index.css -o dist/static/voucomernoru.css",
     "build:js": "mkdir -p dist/static && rollup -c | babel -s inline -o dist/static/voucomernoru.js",
+    "clean": "rm -r dist",
     "heroku-postinstall": "npm run update",
     "start": "[ -f 'dist/server.js' ] || npm run build && node dist/server.js",
     "test": "xo && babel-tap *.spec.js",
