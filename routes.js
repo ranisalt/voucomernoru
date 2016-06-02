@@ -19,7 +19,7 @@ const menu = async () => {
 }
 
 router.get('/', async ctx => {
-  const hour = new Date().getHours()
+  const hour = new Date().getHours() - 3 // offset for UTC-3
   await ctx.render('index', Object.assign(await menu(), {
     images: (await client.lrangeAsync('images', 0, 10)).map(JSON.parse),
     showUpload: (hour >= 11 && hour < 14) || (hour >= 17 && hour < 19)
