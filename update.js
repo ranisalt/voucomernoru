@@ -41,5 +41,6 @@ import client from './storage'
     cloudinary.uploader.destroy(image.id)
   })
 
+  await client.delAsync('images')
   await client.quitAsync()
 })()
