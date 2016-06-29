@@ -54,8 +54,8 @@ html {
 
 @media (max-width: 80em) {
   html {
-    font-size: 4vm; /* IE */
-    font-size: 4vmin;
+    font-size: 3.5vm; /* IE */
+    font-size: 3.5vmin;
   }
 
   .grid {
@@ -69,8 +69,8 @@ html {
 
 @media (max-width: 64em) {
   html {
-    font-size: 5vm; /* IE */
-    font-size: 5vmin;
+    font-size: 4vm; /* IE */
+    font-size: 4vmin;
   }
 
   .grid {
