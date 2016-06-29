@@ -10,12 +10,8 @@ const router = new Router()
 const upload = multer()
 
 const menu = async () => {
-  return {
-    main: await client.getAsync('lunch:main'),
-    complement: await client.getAsync('lunch:complement'),
-    salad: await client.getAsync('lunch:salad'),
-    dessert: await client.getAsync('lunch:dessert')
-  }
+  const menu = await client.hgetallAsync('lunch')
+  return menu
 }
 
 router.get('/', async ctx => {

@@ -9,7 +9,7 @@ import client from './storage'
 (async () => {
   const replMap = {
     'bife': 'chinelo',
-    'quibe': 'quibe :(',
+    'quibe': 'quibe :('
   }
 
   const regex = new RegExp(Object.keys(replMap).join('|'))
@@ -19,7 +19,7 @@ import client from './storage'
   const $ = await request({
     gzip: true,
     transform: cheerio.load,
-    uri: 'http://ru.ufsc.br/ru/',
+    uri: 'http://ru.ufsc.br/ru/'
   })
   // adjust date to UTC-3, make sunday wrap around and offset header
   const weekday = (new Date().getDay() - 1) % 7 + 2
@@ -30,10 +30,12 @@ import client from './storage'
   }
 
   await client.multi()
-    .set('lunch:main', ruify(sanitize(cells.eq(0).text())))
-    .set('lunch:complement', sanitize(cells.eq(1).text()))
-    .set('lunch:salad', sanitize(cells.eq(2).text()))
-    .set('lunch:dessert', sanitize(cells.eq(3).text()))
+    .hmset('lunch', [
+      'main', ruify(sanitize(cells.eq(0).text())),
+      'complement', sanitize(cells.eq(1).text()),
+      'salad', sanitize(cells.eq(2).text()),
+      'dessert', sanitize(cells.eq(3).text())
+    ])
     .execAsync()
 
   const images = await client.lrangeAsync('images', 0, -1).map(JSON.parse)
