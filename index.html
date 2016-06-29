@@ -17,6 +17,17 @@
       <p>{{complement}}</p>
       <p>{{salad}}</p>
       <p>{{dessert}}</p>
+      <p class="juice">{{^juice}}não {{/juice}}tem suco</p>
+      {{#showUpload}}
+      <div class="juice">
+        <div class="pure-button button-success" data-value="true">
+          <span>tem suco</span>
+        </div>
+        <div class="pure-button button-error" data-value="false">
+          <span>não tem suco</span>
+        </div>
+      </div>
+      {{/showUpload}}
     </section>
     <section class="gallery">
       {{#showUpload}}

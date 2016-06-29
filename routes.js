@@ -18,8 +18,20 @@ router.get('/', async ctx => {
   const hour = new Date().getHours() - 3 // offset for UTC-3
   await ctx.render('index', Object.assign(await menu(), {
     images: (await client.lrangeAsync('images', 0, 10)).map(JSON.parse),
+    juice: Number(await client.getAsync('juice')) > 0,
     showUpload: (hour >= 11 && hour < 14) || (hour >= 17 && hour < 19)
   }))
+})
+
+router.post('/juice', upload.single('juice'), async ctx => {
+  const count = do {
+    if (ctx.req.body.juice === 'true') {
+      await client.incrAsync('juice')
+    } else {
+      await client.decrAsync('juice')
+    }
+  }
+  ctx.body = {count}
 })
 
 router.post('/upload', upload.single('image'), async ctx => {

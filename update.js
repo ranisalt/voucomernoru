@@ -36,6 +36,7 @@ import client from './storage'
       'salad', sanitize(cells.eq(2).text()),
       'dessert', sanitize(cells.eq(3).text())
     ])
+    .del('juice')
     .execAsync()
 
   const images = await client.lrangeAsync('images', 0, -1).map(JSON.parse)

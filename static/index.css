@@ -27,6 +27,18 @@ html {
   top: 0;
 }
 
+.button-success, .button-error {
+  color: #fff;
+}
+
+.button-success {
+  background: #1cb841;
+}
+
+.button-error {
+  background: #ca3c3c;
+}
+
 .grid {
   column-count: 3;
   column-gap: 1em;

@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const juice = document.querySelector('div.juice')
+
   /* guess who doesn't support fetch yet...
    * fuck you if you use IE/Safari, I won't write fallbacks */
   if (!window.fetch) {
+    juice.parentNode.removeChild(juice)
     upload.parentNode.removeChild(upload)
     return
   }
@@ -14,6 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
       fileSubmit.disabled = false
       fileSubmit.parentNode.classList.remove('pure-button-disabled')
     }
+  })
+
+  Array.from(juice.children).forEach(button => {
+    button.addEventListener('click', event => {
+      event.preventDefault()
+
+      document.querySelector('p.juice').innerHTML = button.textContent
+
+      const data = new window.FormData()
+      data.append('juice', button.getAttribute('data-value'))
+
+      window.fetch('/juice', {
+        method: 'POST',
+        body: data
+      })
+      .then(response => response.json())
+      .then(() => {
+        juice.parentNode.removeChild(juice)
+      })
+    }, false)
   })
 
   upload.addEventListener('submit', event => {
