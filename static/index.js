@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   upload.addEventListener('submit', event => {
+    event.preventDefault()
+
     const data = new FormData()
     data.append('image', fileInput.files[0])
 
@@ -31,8 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       newImage.src = data.url
       newImage.setAttribute('data-id', data.id)
       gallery.insertBefore(newImage, gallery.firstChild)
+      upload.parentNode.removeChild(upload)
     })
-
-    return event.preventDefault()
-  })
+  }, false)
 })
