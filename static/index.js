@@ -1,5 +1,7 @@
+/* global document:false, window:false */
 document.addEventListener('DOMContentLoaded', () => {
   const juice = document.querySelector('div.juice')
+  const upload = document.upload || document.querySelector('[name="upload"]')
 
   /* guess who doesn't support fetch yet...
    * fuck you if you use IE/Safari, I won't write fallbacks */
@@ -42,10 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
   upload.addEventListener('submit', event => {
     event.preventDefault()
 
-    const data = new FormData()
+    const data = new window.FormData()
     data.append('image', fileInput.files[0])
 
-    fetch(upload.action, {
+    window.fetch(upload.action, {
       method: upload.method,
       body: data
     })
