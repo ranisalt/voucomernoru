@@ -10,7 +10,9 @@ const router = new Router()
 const upload = multer()
 
 const menu = async () => {
-  const menu = await client.hgetallAsync('lunch')
+  const menu = Object.assign(await client.hgetallAsync('lunch'), {
+    juice: Number(await client.getAsync('juice')) > 0
+  })
   return menu
 }
 
@@ -18,7 +20,6 @@ router.get('/', async ctx => {
   const hour = new Date().getHours() - 3 // offset for UTC-3
   await ctx.render('index', Object.assign(await menu(), {
     images: (await client.smembersAsync('images')).map(JSON.parse),
-    juice: Number(await client.getAsync('juice')) > 0,
     showUpload: (hour >= 11 && hour < 14) || (hour >= 17 && hour < 19)
   }))
 })
