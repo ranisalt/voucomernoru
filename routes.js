@@ -17,7 +17,7 @@ const menu = async () => {
 router.get('/', async ctx => {
   const hour = new Date().getHours() - 3 // offset for UTC-3
   await ctx.render('index', Object.assign(await menu(), {
-    images: (await client.lrangeAsync('images', 0, 10)).map(JSON.parse),
+    images: (await client.smembersAsync('images')).map(JSON.parse),
     juice: Number(await client.getAsync('juice')) > 0,
     showUpload: (hour >= 11 && hour < 14) || (hour >= 17 && hour < 19)
   }))
@@ -54,7 +54,7 @@ router.post('/upload', upload.single('image'), async ctx => {
   ctx.body = {
     url: payload.secure_url
   }
-  await client.lpushAsync('images', JSON.stringify({
+  await client.saddAsync('images', JSON.stringify({
     id: payload.public_id,
     url: payload.secure_url
   }))
