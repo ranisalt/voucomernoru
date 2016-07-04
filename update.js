@@ -39,7 +39,7 @@ import client from './storage'
     .del('juice')
     .execAsync()
 
-  const images = await client.lrangeAsync('images', 0, -1).map(JSON.parse)
+  const images = await client.smembersAsync('images').map(JSON.parse)
   images.forEach(image => {
     cloudinary.uploader.destroy(image.id)
   })
