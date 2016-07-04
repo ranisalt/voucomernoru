@@ -13,7 +13,7 @@
     "postinstall": "bower install && npm run build",
     "start": "[ -f 'dist/server.js' ] || npm run build && node dist/server.js",
     "test": "xo && babel-tap *.spec.js",
-    "update": "npm run build:app && node dist/update.js"
+    "update": "node dist/update.js"
   },
   "repository": {
     "type": "git",
