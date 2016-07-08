@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run build:app && npm run build:css && npm run build:js",
-    "build:app": "mkdir -p dist && babel *.js -d dist && cp favicon.ico index.html dist",
+    "build:app": "mkdir -p dist && babel *.js -d dist -s inline && cp favicon.ico *.html dist",
     "build:css": "mkdir -p dist/static && postcss -u autoprefixer -u postcss-import -c postcss.config.json static/index.css -o dist/static/voucomernoru.css",
     "build:js": "mkdir -p dist/static && rollup -c | babel -s inline -o dist/static/voucomernoru.js",
     "clean": "rm -r dist",
@@ -39,6 +39,7 @@
     "koa-static": "^3.0.0",
     "koa-views": "^5.0.1",
     "mustache": "^2.2.1",
+    "pdf2table": "0.0.1",
     "redis": "^2.6.0-2",
     "request": "^2.72.0"
   },

@@ -24,6 +24,12 @@ router.get('/', async ctx => {
   }))
 })
 
+router.get('/cca', async ctx => {
+  await ctx.render('cca', {
+    options: await client.lrangeAsync('cca', 0, -1)
+  })
+})
+
 router.post('/juice', upload.single('juice'), async ctx => {
   const count = do {
     if (ctx.req.body.juice === 'true') {
