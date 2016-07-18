@@ -4,17 +4,15 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "build": "npm run build:app && npm run build:css && npm run build:html &&  npm run build:js",
-    "build:app": "mkdir -p dist && babel *.js -d dist -s inline",
-    "build:css": "mkdir -p dist/static && postcss -u autoprefixer -u postcss-import -c postcss.config.json static/index.css -o dist/static/voucomernoru.css",
-    "build:html": "mkdir -p dist/public && cp public/*.html public/favicon.ico dist/public",
-    "build:js": "mkdir -p dist/static && rollup -c | babel -s inline -o dist/static/voucomernoru.js",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "mkdir -p public && postcss -u autoprefixer -u postcss-import -c postcss.config.json static/index.css -o public/voucomernoru.css",
+    "build:js": "mkdir -p public && rollup -c | babel -s inline -o public/voucomernoru.js",
     "clean": "rm -r dist",
     "heroku-postbuild": "npm run update",
     "postinstall": "bower install && npm run build",
-    "start": "node dist/server.js",
+    "start": "node -r babel-register server.js",
     "test": "xo && babel-tap *.spec.js",
-    "update": "node dist/update.js"
+    "update": "node -r babel-register update.js"
   },
   "repository": {
     "type": "git",
