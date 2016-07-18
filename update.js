@@ -24,7 +24,7 @@ const cca = async() => {
   const weekday = (new Date().getDay()) % 7
 
   // you'll get nothing from me on weekends!
-  if (weekday == 0 || weekday == 6) {
+  if (weekday === 0 || weekday === 6) {
     return
   }
 
@@ -52,13 +52,13 @@ const cca = async() => {
       }
     })
 
-    if (stuff.length % 5 != 0) {
+    if (stuff.length % 5 !== 0) {
       continue
     }
 
     stuff.map(element => element.toLowerCase())
       .filter((element, index) => {
-        return (index % 5) == (weekday - 1) && !ccaIgnores.has(element);
+        return (index % 5) === (weekday - 1) && !ccaIgnores.has(element)
       })
       .forEach(element => {
         multi.rpush('cca', element)
