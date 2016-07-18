@@ -7,7 +7,7 @@
 
 import http from 'http'
 import debug from 'debug'
-import app from './'
+import app from './app'
 
 /**
  * Get port from environment.
