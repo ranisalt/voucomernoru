@@ -17,43 +17,26 @@ app.use(views(`${__dirname}/public`, {
   }
 }))
 
-if (app.env === 'development') {
+const devel = app.env === 'development'
+
+if (devel) {
   app.use(logger('dev'))
-
-  // development error handler
-  // will print stacktrace
-  app.use(async (ctx, next) => {
-    try {
-      await next()
-    } catch (err) {
-      app.emit('error', err, ctx)
-
-      ctx.type = 'application/json'
-      ctx.status = err.status || 404
-      ctx.body = {
-        status: err.status >= 500 ? 'error' : 'fail',
-        message: err.message
-      }
-    }
-  })
-} else {
-  // production error handler
-  // no stacktraces leaked to user
-  app.use(async (ctx, next) => {
-    try {
-      await next()
-    } catch (err) {
-      app.emit('error', err, ctx)
-
-      ctx.type = 'application/json'
-      ctx.status = err.status || 500
-      ctx.body = {
-        status: err.status >= 500 ? 'error' : 'fail',
-        message: '[REDACTED]'
-      }
-    }
-  })
 }
+
+app.use(async (ctx, next) => {
+  try {
+    await next()
+  } catch (err) {
+    app.emit('error', err, ctx)
+
+    ctx.type = 'application/json'
+    ctx.status = err.status || (devel ? 404 : 500)
+    ctx.body = {
+      status: err.status >= 500 ? 'error' : 'fail',
+      message: (devel ? err.message : '[REDACTED]')
+    }
+  }
+})
 
 app.use(router.routes())
 
