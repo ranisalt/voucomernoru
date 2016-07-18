@@ -9,9 +9,9 @@ import router from './routes'
 
 const app = new Koa()
 
-app.use(favicon(`${__dirname}/favicon.ico`))
+app.use(favicon(`${__dirname}/public/favicon.ico`))
 app.use(serve(`${__dirname}/static`))
-app.use(views(`${__dirname}`, {
+app.use(views(`${__dirname}/public`, {
   map: {
     html: 'mustache'
   }
