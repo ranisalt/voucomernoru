@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(() => {
         juice.parentNode.removeChild(juice)
       })
+
+      ga('send', 'event', 'Interaction', 'juice')
     }, false)
   })
 
@@ -60,5 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gallery.insertBefore(newImage, gallery.firstChild)
       upload.parentNode.removeChild(upload)
     })
+
+    ga('send', 'event', 'Interaction', 'picture')
   }, false)
 })
