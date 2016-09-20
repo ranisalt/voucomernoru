@@ -10,7 +10,7 @@
     "clean": "rm -r dist",
     "heroku-postbuild": "npm run update",
     "postinstall": "bower install && npm run build",
-    "start": "node -r babel-register server.js",
+    "start": "node $NODE_DEBUG_OPTION -r babel-register server.js",
     "test": "xo && babel-tap *.spec.js",
     "update": "node -r babel-register update.js"
   },
