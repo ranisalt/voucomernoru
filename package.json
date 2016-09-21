@@ -36,8 +36,7 @@
     "koa-multer": "^1.0.0",
     "koa-router": "^7.0.1",
     "koa-static": "^3.0.0",
-    "koa-views": "^5.0.1",
-    "mustache": "^2.2.1",
+    "nunjucks": "^2.5.2",
     "pdf2table": "0.0.1",
     "redis": "^2.6.0-2",
     "request": "^2.72.0"

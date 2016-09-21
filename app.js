@@ -4,16 +4,10 @@ import Koa from 'koa'
 import favicon from 'koa-favicon'
 import logger from 'koa-logger'
 import serve from 'koa-static'
-import views from 'koa-views'
 import router from './routes'
 
 const app = new Koa()
 
-app.use(views(`${__dirname}/public`, {
-  map: {
-    html: 'mustache'
-  }
-}))
 app.use(favicon(`${__dirname}/public/favicon.ico`))
 app.use(serve(`${__dirname}/public`))
 

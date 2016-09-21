@@ -1,33 +1,39 @@
 'use strict'
 
 import {PassThrough} from 'stream'
+import bluebird from 'bluebird'
 import cloudinary from 'cloudinary'
 import multer from 'koa-multer'
 import Router from 'koa-router'
+import nunjucks from 'nunjucks'
 import client from './storage'
 
 const router = new Router()
 const upload = multer()
 
-const menu = async () => {
-  const menu = Object.assign(await client.hgetallAsync('lunch'), {
-    juice: Number(await client.getAsync('juice')) > 0
-  })
-  return menu
+nunjucks.configure('public')
+const render = bluebird.promisify(nunjucks.render)
+
+const fetchMenu = async () => {
+  const stuff = await client.hgetallAsync('lunch')
+  stuff.juice = Number(await client.getAsync('juice')) > 0
+  return Object.assign({}, stuff)
 }
 
 router.get('/', async ctx => {
   const hour = new Date().getHours() - 3 // offset for UTC-3
-  await ctx.render('index', Object.assign(await menu(), {
-    images: (await client.smembersAsync('images')).map(JSON.parse),
-    showUpload: (hour >= 11 && hour < 14) || (hour >= 17 && hour < 19)
-  }))
+
+  const menu = await fetchMenu()
+  menu.images = (await client.smembersAsync('images')).map(JSON.parse)
+  menu.showUpload = (hour >= 11 && hour < 14) || (hour >= 17 && hour < 19)
+  ctx.body = await render('ru.njk', menu)
 })
 
 router.get('/cca', async ctx => {
-  await ctx.render('cca', {
-    options: await client.lrangeAsync('cca', 0, -1)
-  })
+  const menu = {
+    options: await client.lrangeAsync('cca', 1, -1)
+  }
+  ctx.body = await render('cca.njk', menu)
 })
 
 router.post('/juice', upload.single('juice'), async ctx => {
@@ -68,7 +74,7 @@ router.post('/upload', upload.single('image'), async ctx => {
 })
 
 router.get('/menu.json', async ctx => {
-  ctx.body = await menu()
+  ctx.body = await fetchMenu()
 })
 
 export default router
