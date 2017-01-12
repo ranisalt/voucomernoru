@@ -20,7 +20,7 @@ const ruify = words => words.replace(regex, match => replMap[match])
 const sanitize = words => words.toLowerCase().replace('/', ' e ').trim()
 bluebird.promisifyAll(pdf2table)
 
-const cca = async() => {
+/*const cca = async () => {
   const weekday = (new Date().getDay()) % 7
 
   // you'll get nothing from me on weekends!
@@ -66,7 +66,7 @@ const cca = async() => {
   }
 
   await multi.execAsync()
-}
+}*/
 
 const trindade = async () => {
   const $ = await request({
@@ -100,8 +100,8 @@ const trindade = async () => {
   await client.delAsync('images')
 }
 
-(async() => {
-  await cca()
+(async () => {
+  //await cca()
   await trindade()
   await client.quitAsync()
 })()
