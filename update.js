@@ -1,11 +1,11 @@
 'use strict'
 
-import bluebird from 'bluebird'
-import cheerio from 'cheerio'
-import cloudinary from 'cloudinary'
-import pdf2table from 'pdf2table'
-import request from 'request-promise'
-import client from './storage'
+const bluebird = require('bluebird')
+const cheerio = require('cheerio')
+const cloudinary = require('cloudinary')
+const pdf2table = require('pdf2table')
+const request = require('request-promise')
+const client = require('./storage')
 
 const ccaIgnores = new Set([
   'saladas', 'acompanhamentos quentes', 'carnes', 'sobremesa'
@@ -68,7 +68,7 @@ const cca = async() => {
   await multi.execAsync()
 }
 
-const trindade = async() => {
+const trindade = async () => {
   const $ = await request({
     gzip: true,
     transform: cheerio.load,

@@ -1,19 +1,19 @@
-#! /usr/bin/env node
+#! /usr/bin/env node --harmony
 'use strict'
 
 /**
  * Module dependencies.
  */
 
-import http from 'http'
-import debug from 'debug'
-import app from './app'
+const http = require('http')
+const debug = require('debug')
+const app = require('./app')
 
 /**
  * Get port from environment.
  */
 
-const port = do {
+const port = (() => {
   /**
    * Normalize a port into a number, string, or false.
    */
@@ -22,14 +22,13 @@ const port = do {
 
   if (isNaN(port)) {
     // named pipe
-    process.env.PORT
+    return process.env.PORT
   } else if (port >= 0) {
     // port number
-    port
-  } else {
-    false
+    return port
   }
-}
+  return false
+})()
 
 /**
  * Create HTTP server.

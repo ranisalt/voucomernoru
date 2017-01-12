@@ -1,10 +1,9 @@
 'use strict'
 
-import bluebird from 'bluebird'
-import redis from 'redis'
+const bluebird = require('bluebird')
+const redis = require('redis')
 
 bluebird.promisifyAll(redis.Multi.prototype)
 bluebird.promisifyAll(redis.RedisClient.prototype)
-const client = redis.createClient(process.env.REDIS_URL)
 
-export default client
+module.exports = redis.createClient(process.env.REDIS_URL)
