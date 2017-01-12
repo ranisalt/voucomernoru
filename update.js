@@ -34,7 +34,7 @@ const cca = async() => {
     uri: 'http://ru.ufsc.br/cca-2/'
   })
 
-  const pdfUri = $('.entry > ul:first-of-type a:first-child').attr('href')
+  const pdfUri = $('#content ul:first-of-type a:first-child').attr('href')
   const pdfBuffer = await request({
     encoding: null,
     uri: encodeURI(pdfUri)
@@ -75,8 +75,8 @@ const trindade = async() => {
     uri: 'http://ru.ufsc.br/ru/'
   })
   // adjust date to UTC-3, make sunday wrap around and offset header
-  const weekday = (new Date().getDay() - 1) % 7 + 2
-  const cells = $(`.entry > table:first-of-type tr:nth-child(${weekday}) td:nth-child(n+4)`)
+  const weekday = new Date().getDay()
+  const cells = $(`#content table:first-of-type tr:nth-child(${weekday}) td:nth-child(n+4)`)
 
   if (cells.length !== 4) {
     throw new Error('Failure to parse HTML')
