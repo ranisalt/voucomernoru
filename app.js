@@ -59,9 +59,9 @@ router.get('/', async ctx => {
   ctx.body = await render('ru.njk', menu)
 })
 
-router.get('/cca', async ctx => {
-  ctx.body = await render('cca.njk', {options: await client.lrangeAsync('cca', 1, -1)})
-})
+// router.get('/cca', async ctx => {
+//   ctx.body = await render('cca.njk', {options: await client.lrangeAsync('cca', 1, -1)})
+// })
 
 router.post('/juice', upload.single('juice'), async ctx => {
   if (ctx.req.body.juice === 'true') {
