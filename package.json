@@ -11,7 +11,7 @@
     "heroku-postbuild": "npm run update",
     "postinstall": "bower install && npm run build",
     "start": "node --harmony $NODE_DEBUG_OPTION server.js",
-    "test": "xo && tap *.spec.js",
+    "test": "xo",
     "update": "node --harmony update.js"
   },
   "repository": {
@@ -54,9 +54,6 @@
   },
   "xo": {
     "esnext": true,
-    "rules": {
-      "no-unused-expressions": 1
-    },
     "semicolon": false,
     "space": true
   }
