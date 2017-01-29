@@ -11,7 +11,7 @@
     "heroku-postbuild": "npm run update",
     "postinstall": "bower install && npm run build",
     "start": "node --harmony $NODE_DEBUG_OPTION server.js",
-    "test": "xo && babel-tap *.spec.js",
+    "test": "xo && tap *.spec.js",
     "update": "node --harmony update.js"
   },
   "repository": {
@@ -26,7 +26,6 @@
   "homepage": "https://github.com/ranisalt/voucomernoru#readme",
   "dependencies": {
     "any-promise": "^1.3.0",
-    "babel-runtime": "^6.6.1",
     "bluebird": "^3.3.5",
     "cheerio": "^0.20.0",
     "cloudinary": "^1.3.1",
@@ -40,14 +39,14 @@
     "nunjucks": "^2.5.2",
     "pdf2table": "0.0.1",
     "redis": "^2.6.0-2",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "request-promise": "^3.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "bower": "^1.7.9",
     "postcss-cli": "^2.5.2",
     "postcss-import": "^8.1.2",
-    "request-promise": "^3.0.0",
     "xo": "^0.15.0"
   },
   "engines": {
