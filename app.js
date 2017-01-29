@@ -1,5 +1,6 @@
 'use strict'
 
+const PassThrough = require('stream').PassThrough
 const Koa = require('koa')
 const bluebird = require('bluebird')
 const cloudinary = require('cloudinary')
@@ -7,7 +8,6 @@ const favicon = require('koa-favicon')
 const logger = require('koa-logger')
 const multer = require('koa-multer')
 const nunjucks = require('nunjucks')
-const PassThrough = require('stream').PassThrough
 const Router = require('koa-router')
 const serve = require('koa-static')
 const client = require('./storage')

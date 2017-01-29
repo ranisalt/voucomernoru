@@ -1,4 +1,4 @@
-/* global document:false, window:false */
+/* global document:false, ga:false, window:false */
 document.addEventListener('DOMContentLoaded', () => {
   const juice = document.querySelector('div.juice')
   const upload = document.upload || document.querySelector('[name="upload"]')
