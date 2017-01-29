@@ -12,12 +12,12 @@ const Router = require('koa-router')
 const serve = require('koa-static')
 const client = require('./storage')
 
-nunjucks.configure('public')
+nunjucks.configure('templates')
 const render = bluebird.promisify(nunjucks.render)
 
 const app = new Koa()
 
-app.use(favicon(`${__dirname}/public/favicon.ico`))
+app.use(favicon(`${__dirname}/favicon.ico`))
 app.use(serve(`${__dirname}/public`))
 
 const devel = app.env === 'development'
