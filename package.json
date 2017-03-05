@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run build:css && npm run build:js",
-    "build:css": "mkdir -p public && postcss -u autoprefixer -u postcss-import -c postcss.config.json static/index.css -o public/voucomernoru.css",
+    "build:css": "mkdir -p public && postcss -u autoprefixer -c postcss.config.json static/index.css -o public/voucomernoru.css",
     "build:js": "mkdir -p public && cp static/index.js public/voucomernoru.js",
     "clean": "rm -r dist",
     "heroku-postbuild": "npm run update",
-    "postinstall": "bower install && npm run build",
+    "postinstall": "npm run build",
     "start": "node --harmony $NODE_DEBUG_OPTION server.js",
     "test": "xo",
     "update": "node --harmony update.js"
@@ -44,9 +44,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
-    "bower": "^1.7.9",
     "postcss-cli": "^2.5.2",
-    "postcss-import": "^8.1.2",
     "xo": "^0.15.0"
   },
   "engines": {
