@@ -76,7 +76,7 @@ const trindade = async () => {
   })
   // adjust date to UTC-3, make sunday wrap around and offset header
   const weekday = ((new Date().getDay() - 1) % 7) + 2
-  const cells = $(`.content table:first-of-type tr:nth-child(${weekday}) td:nth-child(n+3)`)
+  const cells = $(`.content table:first-of-type tr:nth-child(${weekday}) td:nth-child(n+4)`)
 
   if (cells.length !== 4) {
     throw new Error('Failure to parse HTML')
