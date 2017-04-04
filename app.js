@@ -45,9 +45,7 @@ const router = new Router()
 const upload = multer()
 
 const fetchMenu = async () => {
-  const stuff = await client.hgetallAsync('lunch')
-  stuff.juice = Number(await client.getAsync('juice')) > 0
-  return stuff
+  return client.hgetallAsync('lunch')
 }
 
 router.get('/', async ctx => {
@@ -62,14 +60,6 @@ router.get('/', async ctx => {
 // router.get('/cca', async ctx => {
 //   ctx.body = await render('cca.njk', {options: await client.lrangeAsync('cca', 1, -1)})
 // })
-
-router.post('/juice', upload.single('juice'), async ctx => {
-  if (ctx.req.body.juice === 'true') {
-    ctx.body = {count: await client.incrAsync('juice')}
-  } else {
-    ctx.body = {count: await client.decrAsync('juice')}
-  }
-})
 
 router.post('/upload', upload.single('image'), async ctx => {
   const payload = await new Promise(resolve => {
