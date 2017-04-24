@@ -45,14 +45,9 @@
   "devDependencies": {
     "autoprefixer": "^6.7.6",
     "postcss-cli": "^3.0.0-beta",
-    "xo": "^0.17.1"
+    "standard": "^10.0.2"
   },
   "engines": {
     "node": ">=7.6.0"
-  },
-  "xo": {
-    "esnext": true,
-    "semicolon": false,
-    "space": true
   }
 }
