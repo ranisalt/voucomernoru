@@ -11,7 +11,7 @@
     "heroku-postbuild": "npm run update",
     "postinstall": "npm run build",
     "start": "node --harmony $NODE_DEBUG_OPTION server.js",
-    "test": "xo",
+    "test": "standard",
     "update": "node --harmony update.js"
   },
   "repository": {
