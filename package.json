@@ -8,7 +8,6 @@
     "build:css": "mkdir -p public && postcss -u autoprefixer -c postcss.config.json static/index.css -o public/voucomernoru.css",
     "build:js": "mkdir -p public && cp static/index.js public/voucomernoru.js",
     "clean": "rm -r dist",
-    "heroku-postbuild": "npm run update",
     "postinstall": "npm run build",
     "start": "node --harmony $NODE_DEBUG_OPTION server.js",
     "test": "standard"
