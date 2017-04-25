@@ -11,8 +11,7 @@
     "heroku-postbuild": "npm run update",
     "postinstall": "npm run build",
     "start": "node --harmony $NODE_DEBUG_OPTION server.js",
-    "test": "standard",
-    "update": "node --harmony update.js"
+    "test": "standard"
   },
   "repository": {
     "type": "git",
@@ -30,6 +29,7 @@
     "cheerio": "^0.22.0",
     "cloudinary": "^1.7.1",
     "debug": "^2.6.1",
+    "easymongo": "^5.0.0",
     "koa": "^2.0.1",
     "koa-favicon": "^2.0.0",
     "koa-logger": "^2.0.1",
@@ -38,7 +38,6 @@
     "koa-static": "^3.0.0",
     "nunjucks": "^3.0.0",
     "pdf2table": "0.0.1",
-    "redis": "^2.6.5",
     "request": "^2.80.0",
     "request-promise": "^4.1.1"
   },

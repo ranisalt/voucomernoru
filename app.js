@@ -2,18 +2,27 @@
 
 const PassThrough = require('stream').PassThrough
 const Koa = require('koa')
-const bluebird = require('bluebird')
 const cloudinary = require('cloudinary')
 const favicon = require('koa-favicon')
 const logger = require('koa-logger')
+const MongoClient = require('easymongo')
 const multer = require('koa-multer')
 const nunjucks = require('nunjucks')
 const Router = require('koa-router')
 const serve = require('koa-static')
-const client = require('./storage')
+const update = require('./update')
 
 nunjucks.configure('templates')
-const render = bluebird.promisify(nunjucks.render)
+const render = function (...args) {
+  return new Promise((resolve, reject) => {
+    return nunjucks.render(...args, (err, res) => {
+      if (err) {
+        reject(err)
+      }
+      resolve(res)
+    })
+  })
+}
 
 const app = new Koa()
 
@@ -25,6 +34,9 @@ const devel = app.env === 'development'
 if (devel) {
   app.use(logger('dev'))
 }
+
+const client = new MongoClient(process.env.MONGODB_URI)
+const db = client.collection('ru')
 
 app.use(async (ctx, next) => {
   try {
@@ -44,16 +56,28 @@ app.use(async (ctx, next) => {
 const router = new Router()
 const upload = multer()
 
-const fetchMenu = async () => {
-  return client.hgetallAsync('lunch')
+function today () {
+  const date = new Date()
+  date.setHours(0, 0, 0, 0)
+  return date
+}
+
+async function fetchMenu() {
+  const date = today()
+  const menu = await db.findOne({date})
+
+  if (!menu) {
+    return update.ru(db, date)
+  } else {
+    return menu;
+  }
 }
 
 router.get('/', async ctx => {
   const hour = new Date().getHours() - 3 // offset for UTC-3
 
   const menu = await fetchMenu()
-  menu.images = (await client.smembersAsync('images')).map(JSON.parse)
-  menu.showUpload = (hour >= 11 && hour < 14) || (hour >= 17 && hour < 19)
+  // menu.showUpload = (hour >= 11 && hour < 14) || (hour >= 17 && hour < 19)
   ctx.body = await render('ru.njk', menu)
 })
 

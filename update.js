@@ -5,7 +5,6 @@ const cheerio = require('cheerio')
 const cloudinary = require('cloudinary')
 const pdf2table = require('pdf2table')
 const request = require('request-promise')
-const client = require('./storage')
 
 // const ccaIgnores = new Set([
 //   'saladas', 'acompanhamentos quentes', 'carnes', 'sobremesa'
@@ -68,7 +67,7 @@ bluebird.promisifyAll(pdf2table)
 //   await multi.execAsync()
 // }
 
-const trindade = async () => {
+exports.ru = async function ru(db, date) {
   const $ = await request({
     gzip: true,
     transform: cheerio.load,
@@ -82,26 +81,17 @@ const trindade = async () => {
     throw new Error('Failure to parse HTML')
   }
 
-  await client.multi()
-    .hmset('lunch', [
-      'main', ruify(sanitize(cells.eq(0).text())),
-      'complement', sanitize(cells.eq(1).text()),
-      'salad', sanitize(cells.eq(2).text()),
-      'dessert', sanitize(cells.eq(3).text())
-    ])
-    .del('juice')
-    .execAsync()
+  const data = {
+    date,
+    main: ruify(sanitize(cells.eq(0).text())),
+    complement: sanitize(cells.eq(1).text()),
+    salad: sanitize(cells.eq(2).text()),
+    dessert: sanitize(cells.eq(3).text())
+  }
 
-  const images = await client.smembersAsync('images').map(JSON.parse)
-  images.forEach(image => {
-    cloudinary.uploader.destroy(image.id)
-  })
-
-  await client.delAsync('images')
+  if (await db.findOne({date})) {
+    return db.update({date}, data)
+  } else {
+    return db.save(data)
+  }
 }
-
-(async () => {
-  // await cca()
-  await trindade()
-  await client.quitAsync()
-})()
