@@ -62,14 +62,14 @@ function today () {
   return date
 }
 
-async function fetchMenu() {
+async function fetchMenu () {
   const date = today()
   const menu = await db.findOne({date})
 
   if (!menu) {
     return update.ru(db, date)
   } else {
-    return menu;
+    return menu
   }
 }
 
