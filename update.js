@@ -4,13 +4,6 @@ const cheerio = require('cheerio')
 const cloudinary = require('cloudinary')
 const request = require('request-promise')
 
-const replMap = {
-  bife: 'chinelo',
-  quibe: 'quibe :('
-}
-
-const regex = new RegExp(Object.keys(replMap).join('|'))
-const ruify = words => words.replace(regex, match => replMap[match])
 const sanitize = words => words.toLowerCase().replace('/', ' e ').trim()
 
 exports.ru = async function ru (db, date) {
@@ -29,7 +22,7 @@ exports.ru = async function ru (db, date) {
 
   const data = {
     date,
-    main: ruify(sanitize(cells.eq(0).text())),
+    main: sanitize(cells.eq(0).text()),
     complement: sanitize(cells.eq(1).text()),
     salad: sanitize(cells.eq(2).text()),
     dessert: sanitize(cells.eq(3).text())
