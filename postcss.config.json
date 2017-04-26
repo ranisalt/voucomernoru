@@ -1,5 +1,0 @@
-{
-  "postcss-import": {
-    "path": ["bower_components"]
-  }
-}
